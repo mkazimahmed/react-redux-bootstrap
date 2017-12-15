@@ -18,3 +18,4 @@ npm-debug.log.*
 tmp
 i18n/json/*
 i18n/src/*
+coverage
