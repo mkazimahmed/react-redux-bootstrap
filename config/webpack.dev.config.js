@@ -13,7 +13,6 @@ var autoprefixer = require('autoprefixer');
 var propsParser = require('properties-parser');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-
 module.exports = function (env) {
     var messagePath = path.resolve('i18n', (locale + '.properties'));
     var messages = propsParser.read(messagePath);
