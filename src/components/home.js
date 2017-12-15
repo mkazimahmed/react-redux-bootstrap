@@ -8,7 +8,7 @@ import {
     FormattedMessage,
 } from 'react-intl';
 
-import './menu.scss';
+import './home.scss';
 
 const messages = defineMessages({
     file: {
@@ -26,9 +26,14 @@ const messages = defineMessages({
         defaultMessage: 'Help',
         description: 'The help menu item',
     },
+    contact: {
+        id: 'contact',
+        defaultMessage: 'Contact',
+        description: 'The cotact menu item',
+    },
 });
 
-export class Menu extends Component {
+export class Home extends Component {
     static propTypes = {
         intl: intlShape,
         className: PropTypes.string,
@@ -50,34 +55,14 @@ export class Menu extends Component {
             <div className='main-menu'>
                 <FormattedMessage
                     id='helloWorld'
-                    defaultMessage='Hello World!'
+                    defaultMessage='Hello Kazim!'
                     description='greeting message'
                 />
-                <ul>
-                    <li>
-                        <a href='#' onClick={ this.onSelectHandler }>
-                            { formatMessage(messages.file) }
-                        </a>
-                    </li>
-                    <li>
-                        <a href='#' onClick={ this.onSelectHandler }>
-                            { formatMessage(messages.edit) }
-                        </a>
-                    </li>
-                    <li>
-                        <a href='#' onClick={ this.onSelectHandler }>
-                            { formatMessage(messages.help) }
-                        </a>
-                    </li>
-                    <li>
-                        <a href='#' onClick={ this.onSelectHandler }>
-                            { formatMessage(messages.help) }
-                        </a>
-                    </li>
-                </ul>
+                <h1>{formatMessage(messages.file)}</h1>
+                <h1>{formatMessage(messages.contact)}</h1>
             </div>
         );
     }
 }
 
-export default injectIntl(Menu);
+export default injectIntl(Home);

@@ -18,16 +18,9 @@ module.exports = {
     'react/lib/ReactContext': true,
     'react/lib/ExecutionEnvironment': true,
   },
-
   devtool: 'inline-source-map',
-
-  isparta: {
-    embedSource: true,
-    noAutoWrap: true,
-  },
-
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.json$/,
         loader: 'json-loader',
@@ -39,30 +32,29 @@ module.exports = {
       {
         test: /\.scss$/,
         loader: 'css!sass',
-      }
-    ],
-
-    noParse: [/node_modules\/sinon\//],
-
-    preLoaders: [
+      },
       {
         test: /\.js$/,
         loader: 'isparta-loader',
         include: path.resolve('src'),
-        exclude: path.resolve('node_modules'),
+        exclude: /\/node_modules\//,
+        enforce: 'pre'
       },
       {
-        test: [/\.spec.js$/, /\.js$/],
+        test: /\.js$/,
         loader: 'babel-loader',
-        include: [
-          path.resolve('test'),
-          path.resolve('scripts'),
-        ],
-        exclude: path.resolve('node_modules'),
+        query: {
+          presets: ["es2015"], 
+        },
+        options: {
+          cacheDirectory: true,
+        },
+        exclude: /\/node_modules\//,
+        enforce: 'pre'
       }
-    ]
+    ],
+    noParse: [/node_modules\/sinon\//],
   },
-
   plugins: [
     new webpack.DefinePlugin({
       __I18N__: JSON.stringify({
@@ -77,6 +69,8 @@ module.exports = {
       sinon: 'sinon/pkg/sinon',
       components: path.join(__dirname, 'src/components'),
       scripts: path.join(__dirname, 'scripts'),
+      'i18n-locale-data': path.resolve(__dirname, 'node_modules/react-intl/locale-data/en.js'),
+      'react-intl': path.resolve(__dirname, 'test-utils/react-intl-mocks.js'),
     },
     extensions: ['.css', '.js', '.jsx', '.json', '.scss'],
   },

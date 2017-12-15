@@ -1,5 +1,5 @@
 import React from 'react';
-import Menu from 'components/menu';
+import Home from './components/home';
 
 // Locale related
 import { addLocaleData, IntlProvider } from 'react-intl';
@@ -18,7 +18,7 @@ const App = () => (
         messages={messages}
     >
         <div className="mainApp">
-            <Menu />
+            <Home />
         </div>
     </IntlProvider>
 );
