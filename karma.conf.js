@@ -1,7 +1,6 @@
 // https://medium.com/@Jukejc/setting-up-karma-to-work-with-enzyme-mocha-and-webpack-in-2017-1ab0c2e9ef00
 /* eslint-disable no-var, strict */
 var webpackConfig = require('./webpack.config.js');
-var path = require('path');
 
 module.exports = function(config){
     config.set({
@@ -30,7 +29,6 @@ module.exports = function(config){
             'src/app.js': ['webpack', 'sourcemap'],
             'src/components/**/__tests__/*-test.js': ['webpack','sourcemap']
         },
-        
         client:{
             mocha: {
                 timeout: '10000',
@@ -59,30 +57,3 @@ module.exports = function(config){
         logLevel: config.LOG_INFO,
     });
 };
-
-
-// webpack: {
-//     devtool: 'inline-source-map',
-//     module: {
-//       loaders: [
-//         {
-//           test: /\.js$/,
-//           loader: 'babel-loader',
-//           exclude: path.resolve(__dirname, 'node_modules'),
-//           query: {
-//             plugins: ['transform-decorators-legacy', 'transform-regenerator'],
-//             presets: ['react', 'es2015', 'stage-1']
-//           }
-//         },
-//         {
-//           test: /\.json$/,
-//           loader: 'json-loader',
-//         },
-//       ]
-//     },
-//     externals: {
-//       'react/addons': true,
-//       'react/lib/ExecutionEnvironment': true,
-//       'react/lib/ReactContext': true
-//     }
-// },

@@ -5,10 +5,7 @@
 /* eslint-disable no-var */
 var path = require('path');
 var webpack = require('webpack');
-var WebpackDevServer = require('webpack-dev-server');
-var webpackConfig = require('./webpack.config.base');
 var locale = process.env.LOCALE || 'en-US';
-var config = webpackConfig(locale);
 var autoprefixer = require('autoprefixer');
 var propsParser = require('properties-parser');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
