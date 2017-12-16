@@ -50,20 +50,32 @@ module.exports = function prod() {
                     exclude: /node_modules/,
                 },
                 {
-                    test: /\.s?css$/,
-                    loader: ExtractTextPlugin.extract({
-                        fallback: 'style-loader',
-                        use: [
-                            'css-loader',
-                            {
-                                loader: 'postcss-loader',
-                                options: {
-                                    plugins: [autoprefixer()],
-                                },
-                            },
-                            'sass-loader',
-                        ],
-                    }),
+                    test: /\.scss$/,
+                    loaders: ['style-loader', 'css-loader', 'sass-loader'],
+                },
+                {
+                    test: /\.css$/,
+                    loaders: ['style-loader', 'css-loader'],
+                },
+                {
+                    test: /\.(png|svg|jpg|gif)$/,
+                    loaders: ['file-loader'],
+                },
+                {
+                    test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
+                    loaders: ['url-loader?limit=10000&mimetype=application/font-woff'],
+                },
+                {
+                    test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
+                    loaders: ['url-loader?limit=10000&mimetype=application/octet-stream'],
+                },
+                {
+                    test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
+                    loaders: ['file-loader'],
+                },
+                {
+                    test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+                    loaders: ['url-loader?limit=10000&mimetype=image/svg+xml'],
                 },
             ],
         },

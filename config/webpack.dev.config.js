@@ -12,16 +12,16 @@ var propsParser = require('properties-parser');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = function dev(env) {
-    var messagePath = path.resolve('i18n', (locale + '.properties'));
+    var messagePath = path.resolve('i18n', `${locale}.properties`);
     var messages = propsParser.read(messagePath);
-  
+
     locale = locale.substr(0, locale.indexOf('-'));
 
     return {
         entry: './src/index.js',
         output: {
             path: __dirname,
-            filename: './bundle.js'
+            filename: './bundle.js',
         },
         resolve: {
             extensions: ['.js', '.jsx', '.css', '.scss'],
@@ -30,10 +30,7 @@ module.exports = function dev(env) {
                 'locale-data': `react-intl/locale-data/${locale}`,
                 'intl-enzyme': path.resolve(__dirname, 'scripts/intl-enzyme-helper'),
             },
-            modules: [
-                path.resolve(__dirname, 'src'),
-                'node_modules',
-            ],
+            modules: [path.resolve(__dirname, 'src'), 'node_modules'],
         },
         module: {
             rules: [
@@ -50,29 +47,39 @@ module.exports = function dev(env) {
                 {
                     test: /\.json$/,
                     loader: 'json-loader',
-                    exclude: /node_modules/
+                    exclude: /node_modules/,
                 },
                 {
-                    test: /\.s?css$/,
-                    loader: ExtractTextPlugin.extract({
-                        fallback: 'style-loader',
-                        use: [
-                            'css-loader',
-                            {
-                                loader: 'postcss-loader',
-                                options: {
-                                    plugins: [
-                                        autoprefixer(),
-                                    ],
-                                },
-                            },
-                            'sass-loader',
-                        ],
-                    }),
+                    test: /\.scss$/,
+                    loaders: ['style-loader', 'css-loader', 'sass-loader'],
+                },
+                {
+                    test: /\.css$/,
+                    loaders: ['style-loader', 'css-loader'],
+                },
+                {
+                    test: /\.(png|svg|jpg|gif)$/,
+                    loaders: ['file-loader'],
+                },
+                {
+                    test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
+                    loaders: ['url-loader?limit=10000&mimetype=application/font-woff'],
+                },
+                {
+                    test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
+                    loaders: ['url-loader?limit=10000&mimetype=application/octet-stream'],
+                },
+                {
+                    test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
+                    loaders: ['file-loader'],
+                },
+                {
+                    test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+                    loaders: ['url-loader?limit=10000&mimetype=image/svg+xml'],
                 },
             ],
         },
-        devtool: "eval-source-map",
+        devtool: 'eval-source-map',
         plugins: [
             new ExtractTextPlugin('styles.css'),
             new webpack.NoEmitOnErrorsPlugin(),
@@ -93,3 +100,21 @@ module.exports = function dev(env) {
         },
     };
 };
+
+
+// {
+//     test: /\.s?css$/,
+//     loader: ExtractTextPlugin.extract({
+//         fallback: 'style-loader',
+//         use: [
+//             'css-loader',
+//             {
+//                 loader: 'postcss-loader',
+//                 options: {
+//                     plugins: [autoprefixer()],
+//                 },
+//             },
+//             'sass-loader',
+//         ],
+//     }),
+// },
