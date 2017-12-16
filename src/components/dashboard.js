@@ -14,17 +14,17 @@ type Props = {
     intl: any,
 }
 
-const Home = ({ intl } : Props) => {
+const Dashboard = ({ intl } : Props) => {
     const { formatMessage } = intl;
     return (
         <h1 className="main-menu">
             <FormattedMessage
-                id="helloWorld"
-                defaultMessage="Hello Kazim!"
+                id="dashboard"
+                defaultMessage="Dashboard"
                 description="greeting message"
             />
         </h1>
     );
 };
 
-export default injectIntl(Home);
+export default injectIntl(Dashboard);
