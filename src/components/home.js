@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+// @flow
+import React from 'react';
 
 import {
     defineMessages,
@@ -13,7 +13,7 @@ import './home.scss';
 const messages = defineMessages({
     file: {
         id: 'file',
-        defaultMessage: 'File',
+        defaultMessage: 'Many Files',
         description: 'The file menu item',
     },
     edit: {
@@ -28,41 +28,24 @@ const messages = defineMessages({
     },
     contact: {
         id: 'contact',
-        defaultMessage: 'Contact',
+        defaultMessage: 'Contact us',
         description: 'The cotact menu item',
     },
 });
 
-export class Home extends Component {
-    static propTypes = {
-        intl: intlShape,
-        className: PropTypes.string,
-        onSelect: PropTypes.func,
-    };
-
-    onSelectHandler = e => {
-        const { onSelect } = this.props;
-
-        if (onSelect) {
-            onSelect(e);
-        }
-    };
-
-    render() {
-        const { formatMessage } = this.props.intl;
-
-        return (
-            <div className='main-menu'>
-                <FormattedMessage
-                    id='helloWorld'
-                    defaultMessage='Hello Kazim!'
-                    description='greeting message'
-                />
-                <h1>{formatMessage(messages.file)}</h1>
-                <h1>{formatMessage(messages.contact)}</h1>
-            </div>
-        );
-    }
-}
+const Home = ({ intl }) => {
+    const { formatMessage } = intl;
+    return (
+        <div className="main-menu">
+            <FormattedMessage
+                id="helloWorld"
+                defaultMessage="Hello Kazim!"
+                description="greeting message"
+            />
+            <h1>{formatMessage(messages.file)}</h1>
+            <h1>{formatMessage(messages.contact)}</h1>
+        </div>
+    );
+};
 
 export default injectIntl(Home);

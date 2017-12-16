@@ -1,6 +1,6 @@
 function buildConfig(env) {
-    env = env || 'dev';  
+    env = env || 'dev';
     return require('./config/webpack.' + env + '.config.js')(env);
-  }
+}
   
 module.exports = buildConfig;

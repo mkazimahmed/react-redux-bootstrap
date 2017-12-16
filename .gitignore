@@ -1,13 +1,10 @@
 .DS_Store
-.idea
 .npmrc
 .sass-cache
 .vimrc
 .vscode
-.werk/*.*
 .yarnclean
 *.iml
-*.sublime-workspace
 /coverage
 /dev
 /dist
